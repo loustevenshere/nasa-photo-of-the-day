@@ -8,15 +8,16 @@ import Footer from './components/Footer';
 
 function App() {
   const [nasaPic, setnasaPic] = useState([]);
+  // const [searchValue, setsearchValue] = useState();
+
   useEffect(() => {
     const fetchAPOD = () => {
       axios
       .get('https://api.nasa.gov/planetary/apod?api_key=QxocYC6yWlIXDrfI3Sa48fNm0SubRlyH8CmGZLxm')
       .then(res => {
-        // console.log(res.data)
         setnasaPic(res.data)
-        console.log(nasaPic);
-        console.log(res.data);
+        //console.log(nasaPic);
+        //console.log(res.data);
       })
       .catch(err => {
         console.log('Houston, we have a problem',err)
@@ -24,7 +25,18 @@ function App() {
     }
     fetchAPOD();
   }, []);
-  console.log(nasaPic);
+  // console.log(nasaPic);
+
+  useEffect(() => {
+    axios
+    .get(`https://api.nasa.gov/planetary/apod?api_key=QxocYC6yWlIXDrfI3Sa48fNm0SubRlyH8CmGZLxm&date=2012-03-14`)
+    .then(res => {
+      console.log(res.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }, [])
 
 
   return (
