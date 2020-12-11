@@ -5,9 +5,11 @@ import "./App.css";
 import Header from './components/Header';
 import APOD from './components/APOD';
 import Footer from './components/Footer';
+import Searchbar from "./components/SearchBar";
 
 function App() {
   const [nasaPic, setnasaPic] = useState([]);
+  const [search, setSearch] = useState('');
   // const [searchValue, setsearchValue] = useState();
 
   useEffect(() => {
@@ -27,21 +29,12 @@ function App() {
   }, []);
   // console.log(nasaPic);
 
-  useEffect(() => {
-    axios
-    .get(`https://api.nasa.gov/planetary/apod?api_key=QxocYC6yWlIXDrfI3Sa48fNm0SubRlyH8CmGZLxm&date=2012-03-14`)
-    .then(res => {
-      console.log(res.data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  }, [])
 
 
   return (
     <div className="App">
       <Header nasa={nasaPic}/>
+      <Searchbar placeholder="2020-05-14" handleChange={(e) => setSearch(e.target.value)} search={search} onSubmit={console.log(search)} />
       <APOD nasa={nasaPic} />
       <Footer />
     </div>
